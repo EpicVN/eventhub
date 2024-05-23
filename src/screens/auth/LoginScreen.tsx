@@ -1,29 +1,39 @@
-import { View, Text, Button } from 'react-native';
-import React from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import ButtonComponent from '../../components/ButtonComponent';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { InputComponent } from '../../components';
 import { globalStyles } from '../../styles/globalStyles';
-import TextComponent from '../../components/TextComponent';
+import {Lock, Sms} from 'iconsax-react-native';
+import { appColors } from '../../constants/appColors';
 
 const LoginScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
-    <View style={[globalStyles.container, {padding: 16}]}>
-      <Text>LoginScreen</Text>
-      {/* <Button 
-        title='login'
-        onPress={async () => 
-          await AsyncStorage.setItem('assetToken', 'fafafa')
-        }
-      
-      /> */}
-      <ButtonComponent
-        type='link'
-        text='LOGIN' 
-        onPress={() => console.log('Login')}
-        icon={<View>
-          <TextComponent text='ICON'/>
-        </View>}
+    <View style={[
+      globalStyles.container, 
+      {
+        justifyContent: 'center',
+        alignItems: 'center'
+      }
+      ]}
+    >
+      <InputComponent 
+        value={email}
+        allowClear
+        placeholder='Email'
+        onChange={val => setEmail(val)}
+        affix={<Sms size={22} color={appColors.gray}></Sms>}
       />
+
+      <InputComponent 
+        value={password}
+        allowClear
+        isPassword
+        placeholder='Password'
+        onChange={val => setPassword(val)}
+        affix={<Lock size={22} color={appColors.gray}></Lock>}
+      />    
     </View>
   );
 };
