@@ -1,12 +1,11 @@
 import { Lock, Sms } from 'iconsax-react-native';
 import React, { useState } from 'react';
-import { Button, Image, Switch } from 'react-native';
+import { Image, Switch } from 'react-native';
 import { ButtonComponent, ContainerComponent, InputComponent, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components';
 import { appColors } from '../../constants/appColors';
 import SocialLogin from './components/SocialLogin';
-import { fontFamilies } from '../../constants/fontFamilies';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
@@ -19,7 +18,7 @@ const LoginScreen = () => {
       <SectionComponent styles={{
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 75
+        marginTop: 20,
       }}>
         <Image 
           source={require('../../assets/images/text-logo.png')}
@@ -63,7 +62,7 @@ const LoginScreen = () => {
           </RowComponent>
           <ButtonComponent 
             text='Forgot password?'
-            onPress={() => {}}
+            onPress={() => navigation.navigate("ForgotPasswordScreen")}
             type='text'
           />
         </RowComponent>
@@ -83,7 +82,7 @@ const LoginScreen = () => {
         <RowComponent justify='center'>
           <TextComponent text='Don’t have an account?'/>
           <SpaceComponent width={5}/>
-          <ButtonComponent text='Sign up' type='link'/>
+          <ButtonComponent text='Sign up' type='link' onPress={() => navigation.navigate('SignUpScreen')}/>
         </RowComponent>
       </SectionComponent>
     </ContainerComponent>

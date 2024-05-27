@@ -17,7 +17,7 @@ const SocialLogin = () => {
           }}
         />
 
-        <SpaceComponent height={5}/>
+        <SpaceComponent height={15}/>
 
         <ButtonComponent
           type='primary'
