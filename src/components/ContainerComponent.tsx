@@ -13,9 +13,9 @@ const ContainerComponent = (props: Props) => {
     const {isImageBackground, isScroll, title, children} = props;
     
     const returnContainer = isScroll ? (
-        <ScrollView style={globalStyles.container}>{children}</ScrollView>
+        <ScrollView style={{flex: 1}}>{children}</ScrollView>
     ) : (
-        <View style={globalStyles.container}>{children}</View>
+        <View style={{flex: 1}}>{children}</View>
     );
 
     return isImageBackground ? (
@@ -29,7 +29,7 @@ const ContainerComponent = (props: Props) => {
             </SafeAreaView>
         </ImageBackground>
     ) : (
-        <SafeAreaView style={globalStyles.container}>
+        <SafeAreaView style={[globalStyles.container]}>
             <View>{returnContainer}</View>
         </SafeAreaView>
     );
