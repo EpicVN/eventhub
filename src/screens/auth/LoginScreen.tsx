@@ -4,11 +4,21 @@ import { Image, Switch } from 'react-native';
 import { ButtonComponent, ContainerComponent, InputComponent, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components';
 import { appColors } from '../../constants/appColors';
 import SocialLogin from './components/SocialLogin';
+import authenticationAPI from '../../apis/authApi';
 
 const LoginScreen = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
+
+  const handleLogin = async () => {
+    try {
+      const res = await authenticationAPI.HandleAuthentication('/hello');
+      console.log(res)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ContainerComponent
@@ -71,7 +81,7 @@ const LoginScreen = ({navigation}: any) => {
       <SpaceComponent height={16}/>
 
       <SectionComponent>
-        <ButtonComponent text='SIGN IN' type='primary'/>
+        <ButtonComponent onPress={handleLogin} text='SIGN IN' type='primary'/>
       </SectionComponent>
 
       <SocialLogin/>
