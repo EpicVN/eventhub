@@ -33,6 +33,7 @@ const InputComponent = (props: Props) => {
                 onChangeText={val => onChange(val)}
                 secureTextEntry={isShowPass}
                 keyboardType={type ?? 'default'}
+                autoCapitalize='none'
             />
             {suffix ?? suffix}
             <TouchableOpacity 

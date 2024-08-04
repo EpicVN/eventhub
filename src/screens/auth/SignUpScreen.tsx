@@ -1,8 +1,14 @@
 import { Lock, Sms } from 'iconsax-react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ButtonComponent, ContainerComponent, InputComponent, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components';
 import { appColors } from '../../constants/appColors';
 import SocialLogin from './components/SocialLogin';
+import { LoadingModal } from '../../modals';
+import authenticationAPI from '../../apis/authApi';
+import { Validate } from '../../utils/validate';
+import { useDispatch } from 'react-redux';
+import { addAuth } from '../../redux/reducers/authReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initValue = {
   userName: '',
@@ -13,6 +19,16 @@ const initValue = {
 
 const SignUpScreen = ({navigation}: any) => {
   const [values, setValue] = useState(initValue);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (values.email || values.password) {
+      setErrorMessage('');
+    }
+  }, [values.email, values.password])
 
   const handleChangeValue = (key: string, value: string) => {
     const data: any = {...values};
@@ -20,10 +36,48 @@ const SignUpScreen = ({navigation}: any) => {
     data[`${key}`] = value;
 
     setValue(data);
+  };
+
+  const handleRegister = async () => {
+    const {email, password, confirmPassword} = values;
+
+    const emailValidation = Validate.Email(email);
+
+    const passValidation = Validate.Password(password);
+
+    if(email && password && confirmPassword) {
+      if(emailValidation && passValidation) {
+        setErrorMessage('');
+        setIsLoading(true);
+        try {
+          const res = await authenticationAPI.HandleAuthentication(
+            '/register', 
+            {
+              fullname: values.userName,
+              email,
+              password,
+            }, 
+            'post');
+
+          dispatch(addAuth(res.data));5 
+          await AsyncStorage.setItem('auth', JSON.stringify(res.data));
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
+          setIsLoading(false);
+        }
+      } else {
+        setErrorMessage('Incorrect email')
+      }
+    }
+    else {
+      setErrorMessage('Vui lòng nhập đầy đủ thông tin')
+    }
   }
 
   return (
-    <ContainerComponent
+    <>
+      <ContainerComponent
       isImageBackground
       isScroll
       back
@@ -69,10 +123,21 @@ const SignUpScreen = ({navigation}: any) => {
         /> 
       </SectionComponent>
 
+        {
+          errorMessage && 
+          <SectionComponent>
+            <TextComponent text={errorMessage} color={appColors.danger}/>
+          </SectionComponent>
+        }
+
       <SpaceComponent height={16}/>
 
       <SectionComponent>
-        <ButtonComponent text='SIGN UP' type='primary' />
+        <ButtonComponent 
+          onPress={handleRegister} 
+          text='SIGN UP' 
+          type='primary' 
+        />
       </SectionComponent>
 
       <SocialLogin/>
@@ -87,6 +152,9 @@ const SignUpScreen = ({navigation}: any) => {
         </RowComponent>
       </SectionComponent>
     </ContainerComponent>
+    <LoadingModal visible={isLoading}/>
+    </>
+    
   );
 };
 

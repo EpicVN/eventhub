@@ -9,7 +9,7 @@ axiosClient.interceptors.request.use(async (config: any) => {
     config.headers = {
         Authorization: '',
         Accept: 'application/json',
-        ...config.headers
+        ...config.headers,
     }
 
     config.data
