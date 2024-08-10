@@ -15,21 +15,27 @@ interface Props {
     textFont?: string;
     textStyle?: StyleProp<TextStyle>;
     onPress?: () => void;
-    iconFlex?: 'right' | 'left'
+    iconFlex?: 'right' | 'left';
+    disable?: boolean;
 }
 
 const ButtonComponent = (props: Props) => {
-    const {icon, text, type, color, styles, textColor, textFont, textStyle, onPress, iconFlex} = props;
+    const {icon, text, type, color, styles, textColor, textFont, textStyle, onPress, iconFlex, disable} = props;
 
     return type === 'primary' ? (
         <View style={{alignItems: 'center'}}>
             <TouchableOpacity
+                disabled={disable}
                 onPress={onPress}
                 style={[
                     globalStyles.button,
                     globalStyles.shadow, 
                     {
-                        backgroundColor: color ?? appColors.primary,
+                        backgroundColor: color
+                            ? color
+                            : disable
+                            ? appColors.gray4
+                            : appColors.primary,
                         marginBottom: 17,
                         width: '80%',
                         

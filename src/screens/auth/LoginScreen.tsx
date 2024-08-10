@@ -80,6 +80,7 @@ const LoginScreen = ({navigation}: any) => {
               trackColor={{true: appColors.primary}}
               thumbColor={appColors.white}
             />
+            <SpaceComponent width={4}/>
             <TextComponent text='Remember me'/>
           </RowComponent>
           <ButtonComponent 
