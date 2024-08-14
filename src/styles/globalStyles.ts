@@ -46,6 +46,15 @@ export const globalStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center'
+    },
+
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#3D56F0',
+        width: 30,
+        height: 30,
+        borderRadius: 100,
     }
     
 });

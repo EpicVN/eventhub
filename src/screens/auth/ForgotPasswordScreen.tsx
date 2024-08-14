@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { ButtonComponent, ContainerComponent, InputComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components'
 import { ArrowRight, Sms } from 'iconsax-react-native';
 import { appColors } from '../../constants/appColors';
+import { globalStyles } from '../../styles/globalStyles';
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +36,11 @@ const ForgotPasswordScreen = () => {
         <ButtonComponent 
           type='primary' 
           text='SEND'
-          icon={<ArrowRight size={13} color={appColors.white}/>}
+          icon={
+            <View style={[globalStyles.iconContainer]}>
+              <ArrowRight size={13} color={appColors.white}/>
+            </View>
+          }
           iconFlex='right'
         />
       </SectionComponent>

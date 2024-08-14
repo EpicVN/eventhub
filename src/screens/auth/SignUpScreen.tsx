@@ -82,7 +82,7 @@ const SignUpScreen = ({navigation}: any) => {
 
   const handleRegister = async () => {
     const api = `/verification`;
-
+    setIsLoading(true);
     try {
       const res = await authenticationAPI.HandleAuthentication(
         api, 
@@ -90,9 +90,15 @@ const SignUpScreen = ({navigation}: any) => {
         'post',
       );
 
-      console.log(res);
+      setIsLoading(false);
+
+      navigation.navigate('VerificationScreen', {
+        code: res.data.code,
+        ...values,
+      })
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   }
 

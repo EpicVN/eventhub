@@ -31,7 +31,7 @@ const LoadingModal = (props: Props) => {
                     text='Loading' 
                     flex={0} 
                     color={appColors.white}
-                    size={28}
+                    size={16}
                 />
             </View>
         </Modal>

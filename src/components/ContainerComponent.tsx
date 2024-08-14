@@ -31,7 +31,8 @@ const ContainerComponent = (props: Props) => {
                                 paddingHorizontal: 16,
                                 marginBottom: 10,
                                 minHeight: 48,
-                                minWidth: 48
+                                minWidth: 48,
+                                justifyContent: 'flex-start',
                             }}
                         >
                             {
