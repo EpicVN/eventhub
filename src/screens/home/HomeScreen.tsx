@@ -10,7 +10,7 @@ import { globalStyles } from '../../styles/globalStyles';
 import { fontFamilies } from '../../constants/fontFamilies';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: any) => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelector);
@@ -30,7 +30,7 @@ const HomeScreen = () => {
         }}
       >
         <RowComponent>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <HambergerMenu size={20} color={appColors.white}/>
           </TouchableOpacity>
 

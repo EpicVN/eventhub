@@ -13,6 +13,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { globalStyles } from '../styles/globalStyles';
+import DrawerNavigator from './DrawerNavigator';
 
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator();

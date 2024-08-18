@@ -6,6 +6,7 @@ import ContainerComponent from "./ContainerComponent";
 import SectionComponent from "./SectionComponent";
 import RowComponent from "./RowComponent";
 import CircleComponent from "./CircleComponent";
+import DrawerCustom from "./DrawerCustom";
 
 export { 
     SpaceComponent, 
@@ -16,4 +17,5 @@ export {
     SectionComponent,
     RowComponent,
     CircleComponent,
+    DrawerCustom,
 }
