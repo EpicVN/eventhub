@@ -1,16 +1,22 @@
-import {HambergerMenu} from 'iconsax-react-native';
+import { HambergerMenu, SearchNormal1, Sort } from 'iconsax-react-native';
 import React from 'react';
-import {Platform, StatusBar, TouchableOpacity, View} from 'react-native';
+import { Platform, StatusBar, TouchableOpacity, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useDispatch, useSelector} from 'react-redux';
-import {CircleComponent, RowComponent, TextComponent} from '../../components';
-import {appColors} from '../../constants/appColors';
-import {authSelector} from '../../redux/reducers/authReducer';
-import {globalStyles} from '../../styles/globalStyles';
-import {fontFamilies} from '../../constants/fontFamilies';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  CircleComponent,
+  RowComponent,
+  SpaceComponent,
+  TagComponent,
+  TextComponent,
+} from '../../components';
+import { appColors } from '../../constants/appColors';
+import { authSelector } from '../../redux/reducers/authReducer';
+import { globalStyles } from '../../styles/globalStyles';
+import { fontFamilies } from '../../constants/fontFamilies';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const HomeScreen = ({navigation}: any) => {
+const HomeScreen = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelector);
@@ -26,8 +32,9 @@ const HomeScreen = ({navigation}: any) => {
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,
           paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 42,
-          paddingHorizontal: 16,
-        }}>
+          paddingHorizontal: 24,
+        }}
+      >
         <RowComponent>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <HambergerMenu size={20} color={appColors.white} />
@@ -37,7 +44,8 @@ const HomeScreen = ({navigation}: any) => {
             style={{
               flex: 1,
               alignItems: 'center',
-            }}>
+            }}
+          >
             <RowComponent>
               <TextComponent
                 text="Current Location  "
@@ -56,7 +64,7 @@ const HomeScreen = ({navigation}: any) => {
             />
           </View>
 
-          <CircleComponent color="#524CE0" size={36}>
+          <CircleComponent color={appColors.primary2} size={36}>
             <View>
               <FontAwesome5 name="bell" size={18} color={appColors.white} />
               <View
@@ -70,9 +78,62 @@ const HomeScreen = ({navigation}: any) => {
                   position: 'absolute',
                   top: -2,
                   right: -2,
-                }}></View>
+                }}
+              ></View>
             </View>
           </CircleComponent>
+        </RowComponent>
+
+        <SpaceComponent height={20} />
+
+        <RowComponent justify="space-between">
+          <RowComponent
+            styles={{ flex: 1 }}
+            onPress={() =>
+              navigation.navigate('SearchEvents', {
+                isFilter: false,
+              })
+            }
+          >
+            <SearchNormal1
+              variant="TwoTone"
+              color={appColors.white}
+              size={20}
+            />
+            <View
+              style={{
+                width: 1,
+                backgroundColor: appColors.white,
+                marginLeft: 10,
+                marginRight: 7,
+                height: 20,
+                opacity: 0.5,
+              }}
+            />
+            <TextComponent
+              styles={{ opacity: 0.5 }}
+              flex={1}
+              text="Search..."
+              color={appColors.white}
+              size={18}
+            />
+          </RowComponent>
+
+          <TagComponent
+            onPress={() =>
+              navigation.navigate('SearchEvents', {
+                isFilter: true,
+              })
+            }
+            label="Filters"
+            textColor={appColors.white}
+            bgColor={appColors.primary2}
+            icon={
+              <CircleComponent color="#A29EF0" size={24}>
+                <Sort size={16} color={appColors.primary2} />
+              </CircleComponent>
+            }
+          />
         </RowComponent>
       </View>
 
@@ -80,7 +141,8 @@ const HomeScreen = ({navigation}: any) => {
         style={{
           flex: 1,
           backgroundColor: appColors.white,
-        }}></View>
+        }}
+      ></View>
     </View>
   );
 };

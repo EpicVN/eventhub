@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  StyleProp,
-  ViewStyle,
-  TouchableOpacity,
-} from 'react-native';
 import React, { ReactNode } from 'react';
+import { StyleProp, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
 
 interface Props {
@@ -33,8 +27,8 @@ const RowComponent = (props: Props) => {
     styles,
   ];
   return onPress ? (
-    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-      <View style={localStyle}>{children}</View>
+    <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={localStyle}>
+      {children}
     </TouchableOpacity>
   ) : (
     <View style={localStyle}>{children}</View>
