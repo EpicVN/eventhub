@@ -12,6 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SpaceComponent from './SpaceComponent';
 import { fontFamilies } from '../constants/fontFamilies';
 import { globalStyles } from '../styles/globalStyles';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   item: EventModel;
@@ -21,11 +22,13 @@ interface Props {
 const EventItem = (props: Props) => {
   const { item, type } = props;
 
+  const navigation: any = useNavigation();
+
   return (
     <CardComponent
       isShadow
       styles={{ width: appInfo.sizes.WIDTH * 0.6, padding: 10 }}
-      onPress={() => {}}
+      onPress={() => navigation.navigate('EventDetail', {item})}
     >
       <ImageBackground
         style={{ flex: 1, height: 131, marginBottom: 14 }}

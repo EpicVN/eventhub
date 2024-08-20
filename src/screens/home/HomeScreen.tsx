@@ -2,6 +2,7 @@ import { HambergerMenu, SearchNormal1, Sort } from 'iconsax-react-native';
 import React from 'react';
 import {
   FlatList,
+  ImageBackground,
   Platform,
   ScrollView,
   StatusBar,
@@ -11,10 +12,13 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  ButtonComponent,
+  CardComponent,
   CategoriesList,
   CircleComponent,
   EventItem,
   RowComponent,
+  SectionComponent,
   SpaceComponent,
   TabBarComponent,
   TextComponent,
@@ -32,7 +36,8 @@ const HomeScreen = ({ navigation }: any) => {
 
   const itemEvent = {
     title: 'International Band Music Concert',
-    description: 'Enjoy your favorite dishe and a lovely your friends and family and have a great time. Food from local food trucks will be available for purchase. Read More...',
+    description:
+      'Enjoy your favorite dishe and a lovely your friends and family and have a great time. Food from local food trucks will be available for purchase. Read More...',
     location: {
       locationName: 'Gala Convention Center',
       address: '36 Guild Street London, UK ',
@@ -43,7 +48,7 @@ const HomeScreen = ({ navigation }: any) => {
     startAt: Date.now(),
     endAt: Date.now(),
     date: Date.now(),
-  }
+  };
 
   return (
     <View style={[globalStyles.container]}>
@@ -180,21 +185,81 @@ const HomeScreen = ({ navigation }: any) => {
         style={[
           {
             flex: 1,
+            marginTop: Platform.OS === 'ios' ? 22 : 17,
           },
         ]}
       >
-        <TabBarComponent title="Upcoming Events" onPress={() => {}} />
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={Array.from({ length: 5 })}
-          renderItem={({ item, index }) => (
-            <EventItem key={`event${index}`} item={itemEvent} type="card" />
-          )}
-          style={{
-            paddingLeft: 14
+        <SectionComponent styles={{ paddingHorizontal: 0, marginTop: -12 }}>
+          <TabBarComponent title="Upcoming Events" onPress={() => {}} />
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={Array.from({ length: 5 })}
+            renderItem={({ item, index }) => (
+              <EventItem key={`event${index}`} item={itemEvent} type="card" />
+            )}
+            style={{
+              paddingLeft: 16,
+            }}
+          />
+        </SectionComponent>
+
+        <SectionComponent
+          styles={{
+            marginLeft: 24,
+            paddingHorizontal: 0,
+            paddingBottom: 0,
           }}
-        />
+        >
+          <ImageBackground
+            source={require('../../assets/images/invite-image.png')}
+            style={{ flex: 1, padding: 16, minHeight: 127 }}
+            imageStyle={{
+              resizeMode: 'cover',
+              borderRadius: 12,
+            }}
+          >
+            <TextComponent title text="Invite your friend" size={18} />
+            <TextComponent text="Get $20 for ticket" size={13} />
+
+            <RowComponent justify="flex-start">
+              <TouchableOpacity
+                style={[
+                  globalStyles.button,
+                  {
+                    marginTop: 12,
+                    backgroundColor: '#00F8FF',
+                    paddingVertical: 8,
+                    minHeight: 32,
+                    borderRadius: 5,
+                  },
+                ]}
+              >
+                <TextComponent
+                  text="INVITE"
+                  font={fontFamilies.bold}
+                  color={appColors.white}
+                  size={12}
+                />
+              </TouchableOpacity>
+            </RowComponent>
+          </ImageBackground>
+        </SectionComponent>
+
+        <SectionComponent styles={{ paddingHorizontal: 0, marginTop: -24 }}>
+          <TabBarComponent title="Nearby Events" onPress={() => {}} />
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={Array.from({ length: 5 })}
+            renderItem={({ item, index }) => (
+              <EventItem key={`event${index}`} item={itemEvent} type="card" />
+            )}
+            style={{
+              paddingLeft: 16,
+            }}
+          />
+        </SectionComponent>
       </ScrollView>
     </View>
   );
