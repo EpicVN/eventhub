@@ -10,10 +10,9 @@ import {
   View,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ButtonComponent,
-  CardComponent,
   CategoriesList,
   CircleComponent,
   EventItem,
@@ -24,10 +23,9 @@ import {
   TextComponent,
 } from '../../components';
 import { appColors } from '../../constants/appColors';
+import { fontFamilies } from '../../constants/fontFamilies';
 import { authSelector } from '../../redux/reducers/authReducer';
 import { globalStyles } from '../../styles/globalStyles';
-import { fontFamilies } from '../../constants/fontFamilies';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const HomeScreen = ({ navigation }: any) => {
   const dispatch = useDispatch();

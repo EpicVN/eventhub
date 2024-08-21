@@ -1,18 +1,16 @@
-import { View, Text, ImageBackground } from 'react-native';
-import React from 'react';
-import CardComponent from './CardComponent';
-import TextComponent from './TextComponent';
-import { appInfo } from '../constants/appInfos';
-import { EventModel } from '../models/EventModel';
-import AvatarGroup from './AvatarGroup';
-import RowComponent from './RowComponent';
-import { Bookmark, Bookmark2, Location } from 'iconsax-react-native';
-import { appColors } from '../constants/appColors';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SpaceComponent from './SpaceComponent';
-import { fontFamilies } from '../constants/fontFamilies';
-import { globalStyles } from '../styles/globalStyles';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { ImageBackground } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { appColors } from '../constants/appColors';
+import { appInfo } from '../constants/appInfos';
+import { fontFamilies } from '../constants/fontFamilies';
+import { EventModel } from '../models/EventModel';
+import { globalStyles } from '../styles/globalStyles';
+import AvatarGroup from './AvatarGroup';
+import CardComponent from './CardComponent';
+import RowComponent from './RowComponent';
+import TextComponent from './TextComponent';
 
 interface Props {
   item: EventModel;

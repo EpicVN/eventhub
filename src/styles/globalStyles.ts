@@ -38,7 +38,7 @@ export const globalStyles = StyleSheet.create({
   },
 
   section: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 24,
     paddingBottom: 20,
   },
 
@@ -58,8 +58,8 @@ export const globalStyles = StyleSheet.create({
   },
 
   tag: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 7,
     borderRadius: 100,
   },
 
