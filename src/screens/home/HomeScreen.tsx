@@ -1,5 +1,5 @@
 import { HambergerMenu, SearchNormal1, Sort } from 'iconsax-react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   ImageBackground,
@@ -26,11 +26,47 @@ import { appColors } from '../../constants/appColors';
 import { fontFamilies } from '../../constants/fontFamilies';
 import { authSelector } from '../../redux/reducers/authReducer';
 import { globalStyles } from '../../styles/globalStyles';
+import Geolocation from '@react-native-community/geolocation';
+import axios from 'axios';
+import { AddressModel } from '../../models/AddressModel';
 
 const HomeScreen = ({ navigation }: any) => {
+  const [currentLocation, setCurrentLocation] = useState<AddressModel>();
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelector);
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition((position) => {
+      if (position.coords) {
+        reverseGeocoding({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        });
+      }
+    });
+  });
+
+  const reverseGeocoding = async ({
+    lat,
+    long,
+  }: {
+    lat: number;
+    long: number;
+  }) => {
+    const api = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${long}&lang=vi-VI&apiKey=2wLZpG_pE6iSSPJwCKmfVNSFu9HKw8IG4PDqWm6VeXA`;
+
+    try {
+      const res = await axios(api);
+
+      if (res && res.status === 200 && res.data) {
+        const item = res.data.items;
+        setCurrentLocation(item[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const itemEvent = {
     title: 'International Band Music Concert',
@@ -83,13 +119,15 @@ const HomeScreen = ({ navigation }: any) => {
                 <AntDesign name="caretdown" size={10} color={appColors.white} />
               </RowComponent>
 
-              <TextComponent
-                text="New York, USA"
-                flex={0}
-                color={appColors.white}
-                font={fontFamilies.medium}
-                size={13}
-              />
+              {currentLocation && (
+                <TextComponent
+                  text={`${currentLocation.address.city}, ${currentLocation.address.countryName}`}
+                  flex={0}
+                  color={appColors.white}
+                  font={fontFamilies.medium}
+                  size={13}
+                />
+              )}
             </View>
 
             <CircleComponent color={appColors.primary2} size={36}>
