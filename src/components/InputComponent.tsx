@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TextInputProps,
   KeyboardType,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import React, { ReactNode, useState } from 'react';
 import { EyeSlash } from 'iconsax-react-native';
@@ -26,6 +28,7 @@ interface Props {
   onEnd?: () => void;
   multiline?: boolean;
   numberOfLine?: number;
+  styles?: StyleProp<ViewStyle>;
 }
 
 const InputComponent = (props: Props) => {
@@ -41,19 +44,28 @@ const InputComponent = (props: Props) => {
     type,
     multiline,
     numberOfLine,
+    styles
   } = props;
 
   const [isShowPass, setIsShowPass] = useState(isPassword ?? false);
 
   return (
-    <View style={styles.inputContainer}>
+    <View
+      style={[
+        globalStyles.inputContainer,
+        {
+          alignItems: multiline ? 'flex-start' : 'center',
+        },
+        styles,
+      ]}
+    >
       {affix ?? affix}
       <TextInput
         multiline={multiline}
         numberOfLines={numberOfLine}
         value={value}
         style={[
-          styles.input,
+          globalStyles.input,
           globalStyles.text,
           {
             paddingHorizontal: affix || suffix ? 12 : 0,
@@ -91,26 +103,3 @@ const InputComponent = (props: Props) => {
 };
 
 export default InputComponent;
-
-const styles = StyleSheet.create({
-  inputContainer: {
-    flexDirection: 'row',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: appColors.gray3,
-    width: '100%',
-    minHeight: 56,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 15,
-    backgroundColor: appColors.white,
-    marginBottom: 19,
-  },
-
-  input: {
-    padding: 0,
-    margin: 0,
-    flex: 1,
-    color: appColors.text,
-  },
-});

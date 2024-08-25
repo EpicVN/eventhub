@@ -79,4 +79,27 @@ export const globalStyles = StyleSheet.create({
     padding: 0,
     margin: 0,
   },
+
+  inputContainer: {
+    flexDirection: 'row',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: appColors.gray3,
+    width: '100%',
+    minHeight: 56,
+
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    backgroundColor: appColors.white,
+    marginBottom: 19,
+  },
+
+  input: {
+    padding: 0,
+    margin: 0,
+    flex: 1,
+    color: appColors.text,
+  },
 });

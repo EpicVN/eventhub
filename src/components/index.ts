@@ -13,6 +13,7 @@ import TabBarComponent from "./TabBarComponent";
 import EventItem from "./EventItem";
 import CardComponent from "./CardComponent";
 import AvatarGroup from "./AvatarGroup";
+import LocationPicker from "./LocationPicker";
 
 export { 
     SpaceComponent, 
@@ -30,4 +31,5 @@ export {
     EventItem,
     CardComponent,
     AvatarGroup,
+    LocationPicker,
 }

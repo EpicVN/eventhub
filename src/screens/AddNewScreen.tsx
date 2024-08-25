@@ -1,11 +1,16 @@
-import { View, Text } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import {
+  ButtonComponent,
   ContainerComponent,
   InputComponent,
+  LocationPicker,
   SectionComponent,
   TextComponent,
 } from '../components';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../redux/reducers/authReducer';
+import { appColors } from '../constants/appColors';
 
 const initValues = {
   title: '',
@@ -23,10 +28,14 @@ const initValues = {
 };
 
 const AddNewScreen = () => {
-  const [eventData, setEventData] = useState<any>(initValues);
+  const auth = useSelector(authSelector);
+  const [eventData, setEventData] = useState<any>({
+    ...initValues,
+    authorId: auth.id,
+  });
 
   const handleChangeValue = (key: string, value: string) => {
-    const items = {...eventData};
+    const items = { ...eventData };
     items[`${key}`] = value;
 
     setEventData(items);
@@ -46,6 +55,7 @@ const AddNewScreen = () => {
           value={eventData.title}
           onChange={(val) => handleChangeValue('title', val)}
           placeholder="Title"
+          allowClear
         />
 
         <InputComponent
@@ -54,6 +64,17 @@ const AddNewScreen = () => {
           placeholder="Description"
           multiline
           numberOfLine={3}
+          allowClear
+        />
+
+        <LocationPicker />
+      </SectionComponent>
+
+      <SectionComponent>
+        <ButtonComponent
+          text='Add New'
+          onPress={handleAddEvent}
+          type="primary"
         />
       </SectionComponent>
     </ContainerComponent>
