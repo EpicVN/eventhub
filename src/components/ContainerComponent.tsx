@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { ArrowLeft } from 'iconsax-react-native';
 import React, { ReactNode } from 'react';
-import { ImageBackground, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, SafeAreaView, ScrollView, StatusBar, TouchableOpacity, View } from 'react-native';
 import { appColors } from '../constants/appColors';
 import { globalStyles } from '../styles/globalStyles';
 import RowComponent from './RowComponent';
@@ -83,7 +83,8 @@ const ContainerComponent = (props: Props) => {
         </ImageBackground>
     ) : (
         <SafeAreaView style={[globalStyles.container]}>
-            <View>{headerContainer()}</View>
+            <StatusBar barStyle={'dark-content'}/>
+            <View style={[globalStyles.container]}>{headerContainer()}</View>
         </SafeAreaView>
     );
 };
