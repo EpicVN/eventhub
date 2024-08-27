@@ -1,16 +1,17 @@
-import { View, Text, TextInput } from 'react-native';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   ButtonComponent,
   ContainerComponent,
+  DateTimePickerComponent,
   InputComponent,
   LocationPicker,
+  RowComponent,
   SectionComponent,
+  SpaceComponent,
   TextComponent,
 } from '../components';
-import { useSelector } from 'react-redux';
 import { authSelector } from '../redux/reducers/authReducer';
-import { appColors } from '../constants/appColors';
 
 const initValues = {
   title: '',
@@ -34,7 +35,7 @@ const AddNewScreen = () => {
     authorId: auth.id,
   });
 
-  const handleChangeValue = (key: string, value: string) => {
+  const handleChangeValue = (key: string, value: string | Date) => {
     const items = { ...eventData };
     items[`${key}`] = value;
 
@@ -68,11 +69,36 @@ const AddNewScreen = () => {
         />
 
         <LocationPicker />
+
+        <RowComponent>
+          <DateTimePickerComponent
+            type="time"
+            onSelect={(val) => handleChangeValue('startAt', val)}
+            selected={eventData.startAt}
+            label="Start at:"
+          />
+
+          <SpaceComponent width={20} />
+
+          <DateTimePickerComponent
+            type="time"
+            onSelect={(val) => handleChangeValue('endAt', val)}
+            selected={eventData.endAt}
+            label="End at:"
+          />
+        </RowComponent>
+
+        <DateTimePickerComponent
+          type="date"
+          onSelect={(val) => handleChangeValue('date', val)}
+          selected={eventData.date}
+          label="Date:"
+        />
       </SectionComponent>
 
       <SectionComponent>
         <ButtonComponent
-          text='Add New'
+          text="Add New"
           onPress={handleAddEvent}
           type="primary"
         />
