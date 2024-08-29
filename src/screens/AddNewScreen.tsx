@@ -4,6 +4,7 @@ import {
   ButtonComponent,
   ContainerComponent,
   DateTimePickerComponent,
+  DropdownPickerComponent,
   InputComponent,
   LocationPicker,
   RowComponent,
@@ -12,6 +13,7 @@ import {
   TextComponent,
 } from '../components';
 import { authSelector } from '../redux/reducers/authReducer';
+import userAPI from '../apis/userApi';
 
 const initValues = {
   title: '',
@@ -43,7 +45,8 @@ const AddNewScreen = () => {
   };
 
   const handleAddEvent = async () => {
-    console.log(eventData);
+    const res = await userAPI.HandleUser('/get-all');
+    console.log(res);
   };
   return (
     <ContainerComponent isScroll>
@@ -93,6 +96,15 @@ const AddNewScreen = () => {
           onSelect={(val) => handleChangeValue('date', val)}
           selected={eventData.date}
           label="Date:"
+        />
+
+        <DropdownPickerComponent
+          label='Invite people'
+          values={[]}
+          onSelect={(val: string) => {
+            console.log(val);
+          }}
+          selected={undefined}
         />
       </SectionComponent>
 
